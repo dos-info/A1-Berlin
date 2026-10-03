@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DOS Academy – لوحة ساعات المذاكرة A1 Berlin</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--bg:#F8F9FA;--card:#fff;--tx:#111;--mu:#666;--bd:#e3e5e8;--rd:#D32F2F;--gd:#FBC02D;--gn:#2E7D32;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121212;--card:#1c1c1e;--tx:#f2f2f2;--mu:#a0a0a0;--bd:#333;--gn:#66BB6A}}
+:root[data-theme="dark"]{--bg:#121212;--card:#1c1c1e;--tx:#f2f2f2;--mu:#a0a0a0;--bd:#333;--gn:#66BB6A}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font-family:Tahoma,Arial,sans-serif;line-height:1.6}
+header{background:#111;color:#fff;padding:18px 16px 0}
+.hd{max-width:1100px;margin:auto;display:flex;align-items:center;gap:14px}
+.hd img{width:64px;height:64px;border-radius:12px;background:#fff;padding:4px;object-fit:contain}
+.hd h1{font-size:1.25rem;margin:0}.hd p{margin:0;color:#bbb;font-size:.85rem}
+.flag{display:flex;height:6px;margin-top:16px}.flag i{flex:1}.flag i:nth-child(1){background:#111;border-top:1px solid #333}.flag i:nth-child(2){background:#D32F2F}.flag i:nth-child(3){background:#FBC02D}
+main{max-width:1100px;margin:auto;padding:16px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+select,input{padding:8px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font:inherit}
+label{font-size:.85rem;color:var(--mu)}
+.note{background:#FBC02D22;border:1px solid var(--gd);border-radius:10px;padding:8px 12px;font-size:.85rem;margin-bottom:14px}
+.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px}
+.k b{display:block;font-size:1.5rem}.k span{font-size:.8rem;color:var(--mu)}
+.k:nth-child(1){border-top:4px solid #111}.k:nth-child(2){border-top:4px solid var(--rd)}.k:nth-child(3){border-top:4px solid var(--gd)}.k:nth-child(4){border-top:4px solid var(--rd)}.k:nth-child(5){border-top:4px solid var(--gd)}
+.sp{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin-bottom:14px}
+.sp .c h3{margin:0 0 6px;font-size:1rem}.top{border-inline-start:5px solid var(--gd)}.low{border-inline-start:5px solid var(--rd)}
+button{padding:7px 12px;border:0;border-radius:8px;background:#111;color:#fff;font:inherit;cursor:pointer;margin-top:8px}
+.ch{position:relative;height:300px}.row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:10px;margin-bottom:14px}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:720px}
+th,td{padding:9px 8px;text-align:right;border-bottom:1px solid var(--bd)}th{background:#111;color:#fff;cursor:pointer;white-space:nowrap}
+.bd{display:inline-block;padding:2px 10px;border-radius:99px;font-size:.78rem;white-space:nowrap}
+.g{background:#2E7D3222;color:var(--gn)}.y{background:#FBC02D33;color:#9a6b00}.r{background:#D32F2F22;color:var(--rd)}
+.pb{background:var(--bd);border-radius:6px;height:8px;min-width:80px}.pb i{display:block;height:100%;border-radius:6px}
+footer{background:#111;color:#ddd;padding:20px 16px;font-size:.82rem;margin-top:20px}
+footer div{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+footer b{color:var(--gd)}footer a{color:#fff}
+</style>
+</head>
+<body>
+<header><div class="hd"><img alt="DOS" src="data:image/png;base64,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"><div><h1>DOS – Drei Online Spezialisten</h1><p>Lernen. Verstehen. Umsetzen. · تقرير مذاكرة مجموعة A1 Berlin</p></div></div><div class="flag"><i></i><i></i><i></i></div></header>
+<main>
+<div class="bar">
+<label>الشهر <select id="m"></select></label>
+<label><input type="checkbox" id="ex" checked> استبعاد الجلسات الشاذة (أكثر من 12 ساعة)</label>
+</div>
+<div class="note" id="nt"></div>
+<div class="kp" id="kp"></div>
+<div class="sp"><div class="c top" id="tp"></div><div class="c low" id="lw"></div></div>
+<div class="row2">
+<div class="c"><b>الساعات الفعلية مقابل الهدف (90 ساعة)</b><div class="ch"><canvas id="c1"></canvas></div></div>
+<div class="c"><b>مذاكرة طالب يومياً</b> <select id="ps"></select><div class="ch"><canvas id="c2"></canvas></div></div>
+</div>
+<div class="c"><div class="bar"><b>بيانات الطلاب</b><input id="q" placeholder="بحث بالاسم أو الكود"><select id="f"><option value="">كل التقييمات</option><option value="g">متميز</option><option value="y">قريب من المستهدف</option><option value="r">تحت المستهدف</option></select></div>
+<div class="tw"><table><thead><tr><th>الطالب</th><th>الكود</th><th>الجلسات</th><th>الساعات</th><th>الإنجاز</th><th>متوسط يومي</th><th>عجز/زيادة يومية</th><th>التقييم</th></tr></thead><tbody id="tb"></tbody></table></div></div>
+</main>
+<footer><div>
+<p><b>Kontakt</b><br>info@dos-eg.com<br>+20 155 300 2897 · +20 101 479 0783<br>+20 102 881 8465 · +20 111 946 0901</p>
+<p><b>Buchhalter</b><br>buchhaltung@dos-eg.com<br>نفس أرقام التواصل</p>
+<p><b>Kareer</b><br>hr@dos-eg.com<br>نفس أرقام التواصل</p>
+</div></footer>
+<script>
+const D={"s":[["Eman Mohamed Ziada","DOS100044"],["Abdelrahman Reda Aboalia","DOS100065"],["Janet yousef samwel","DOS100062"],["Maha Samir Alshik","DOS100052"],["Heba Ahmed sadiek","DOS100043"],["Ahella Amr Helal","DOS100051"]],"r":[[0,"2026-10","2026-10-03",19,0],[1,"2026-10","2026-10-03",0,0],[2,"2026-10","2026-10-03",433,0],[0,"2026-10","2026-10-02",55,0],[3,"2026-10","2026-10-02",136,0],[0,"2026-10","2026-10-02",57,0],[0,"2026-10","2026-10-02",77,0],[2,"2026-10","2026-10-02",9,20],[4,"2026-10","2026-10-01",184,0],[0,"2026-10","2026-10-01",250,0],[3,"2026-10","2026-10-01",207,20],[2,"2026-10","2026-10-01",23,0],[2,"2026-09","2026-10-01",0,20],[3,"2026-09","2026-09-30",181,0],[2,"2026-09","2026-09-30",0,0],[2,"2026-09","2026-09-30",0,20],[5,"2026-09","2026-09-30",4078,0],[2,"2026-09","2026-09-30",0,20],[0,"2026-09","2026-09-30",57,0],[0,"2026-09","2026-09-30",42,0],[3,"2026-09","2026-09-29",90,20],[4,"2026-09","2026-09-29",79,0],[4,"2026-09","2026-09-29",0,0],[3,"2026-09","2026-09-28",69,0],[2,"2026-09","2026-09-28",565,0],[2,"2026-09","2026-09-28",25,0],[2,"2026-09","2026-09-28",22,0],[3,"2026-09","2026-09-27",66,0],[4,"2026-09","2026-09-27",0,0],[4,"2026-09","2026-09-27",33,0],[5,"2026-09","2026-09-27",167,23],[4,"2026-09","2026-09-27",0,20],[4,"2026-09","2026-09-27",28,0],[4,"2026-09","2026-09-27",0,20],[3,"2026-09","2026-09-27",135,0],[2,"2026-09","2026-09-26",57,0],[2,"2026-09","2026-09-26",789,0],[4,"2026-09","2026-09-26",175,20],[4,"2026-09","2026-09-26",19,0],[3,"2026-09","2026-09-26",191,20],[4,"2026-09","2026-09-26",11,20],[4,"2026-09","2026-09-26",0,0],[4,"2026-09","2026-09-26",0,20],[0,"2026-09","2026-09-26",649,0],[2,"2026-09","2026-09-26",26,0],[2,"2026-09","2026-09-25",37,0],[2,"2026-09","2026-09-25",0,0],[0,"2026-09","2026-09-25",18,0],[0,"2026-09","2026-09-25",0,0],[2,"2026-09","2026-09-25",26,33],[0,"2026-09","2026-09-25",89,0],[3,"2026-09","2026-09-25",347,0],[3,"2026-09","2026-09-25",155,20],[3,"2026-09","2026-09-25",0,20],[2,"2026-09","2026-09-25",0,0],[2,"2026-09","2026-09-25",3,0],[2,"2026-09","2026-09-25",0,20],[2,"2026-09","2026-09-25",0,0],[2,"2026-09","2026-09-25",0,20],[2,"2026-09","2026-09-25",0,0],[2,"2026-09","2026-09-24",131,20],[2,"2026-09","2026-09-24",2,0],[4,"2026-09","2026-09-24",336,20],[2,"2026-09","2026-09-24",10,0],[2,"2026-09","2026-09-23",72,0],[3,"2026-09","2026-09-23",302,20],[2,"2026-09","2026-09-23",28,0],[5,"2026-09","2026-09-22",56,0],[0,"2026-09","2026-09-22",154,0],[3,"2026-09","2026-09-22",0,0],[0,"2026-09","2026-09-22",59,0],[2,"2026-09","2026-09-22",0,20],[3,"2026-09","2026-09-21",1094,0],[2,"2026-09","2026-09-21",86,20],[4,"2026-09","2026-09-21",42,0],[3,"2026-09","2026-09-21",288,20],[2,"2026-09","2026-09-21",22,0],[4,"2026-09","2026-09-21",404,0],[5,"2026-09","2026-09-20",46,0],[5,"2026-09","2026-09-20",0,20],[4,"2026-09","2026-09-20",382,0],[2,"2026-09","2026-09-20",26,0],[2,"2026-09","2026-09-20",10,0],[3,"2026-09","2026-09-19",240,20],[2,"2026-09","2026-09-19",0,0],[3,"2026-09","2026-09-19",186,20],[2,"2026-09","2026-09-18",22,0],[0,"2026-09","2026-09-18",0,20],[0,"2026-09","2026-09-18",113,0],[0,"2026-09","2026-09-18",35,0],[2,"2026-09","2026-09-18",106,20],[0,"2026-09","2026-09-18",55,0],[3,"2026-09","2026-09-17",5,0],[0,"2026-09","2026-09-13",0,0]]},CAP=720,T=90,GOAL=3;
+const M={'2026-09':{n:'سبتمبر 2026',d:30},'2026-10':{n:'أكتوبر 2026 (شهر جارٍ – 3 أيام)',d:3}};
+const TOP=['أداء استثنائي وتألق ملحوظ! استمر في هذا المستوى الرائع للوصول للقمة! 🚀','أنت قدوة للمجموعة كلها، الجميع يتعلّم من التزامك! 🌟','كل ساعة تذاكرها اليوم تقرّبك من شهادة Goethe. أحسنت! 🏆'];
+const LOW=['تنبيه هام! مستواك الحالي أقل من المطلوب. يرجى الالتزام بجدول المذاكرة اليومي فوراً لتحقيق هدفك! ⚠️','ابدأ اليوم بساعة واحدة فقط، والباقي سيأتي بسهولة. أنت قادر! 💪','زملاؤك سبقوك قليلاً، لكن الفرصة ما زالت أمامك. شدّ حيلك! 🔥'];
+let tip=0,ch1,ch2;
+const $=i=>document.getElementById(i),h=m=>(m/60).toFixed(1);
+const tier=p=>p>=90?['متميز 🌟','g','#2E7D32']:p>=50?['قريب من المستهدف 👍','y','#FBC02D']:['تحت المستهدف / تحذير ⚠️','r','#D32F2F'];
+Object.entries(M).forEach(([k,v])=>$('m').add(new Option(v.n,k)));$('m').value='2026-09';
+D.s.forEach((s,i)=>$('ps').add(new Option(s[0],i)));
+function calc(){const mo=$('m').value,ex=$('ex').checked,days=M[mo].d;
+const a=D.s.map((s,i)=>({i,n:s[0],c:s[1],m:0,ses:0,fl:0,pa:0}));
+D.r.filter(r=>r[1]==mo).forEach(r=>{const x=a[r[0]];x.ses++;x.pa+=r[4];if(r[3]>CAP){x.fl++;if(ex)return}x.m+=r[3]});
+a.forEach(x=>{x.h=x.m/60;x.p=x.h/T*100;x.avg=x.h/days;x.df=x.avg-GOAL});return a}
+function render(){const a=calc(),mo=$('m').value,fl=a.reduce((s,x)=>s+x.fl,0),ex=$('ex').checked;
+const s=[...a].sort((x,y)=>y.m-x.m),top=s[0],low=s[s.length-1];
+$('nt').innerHTML=(fl?`⚠️ يوجد ${fl} جلسة تتجاوز 12 ساعة (غالباً نُسي إنهاء الجلسة) – ${ex?'تم استبعادها من الحساب':'محسوبة الآن'}. `:'')+(mo=='2026-10'?'الشهر لم ينتهِ بعد؛ المتوسط اليومي محسوب على الأيام المنقضية، والهدف 90 ساعة للشهر كاملاً.':'الهدف: 3 ساعات يومياً = 90 ساعة شهرياً.');
+const tot=a.reduce((z,x)=>z+x.h,0);
+$('kp').innerHTML=[[tot.toFixed(1),'إجمالي الساعات'],[(tot/a.length).toFixed(1),'متوسط ساعات الطالب'],[a.filter(x=>x.p>=90).length,'حققوا الهدف (≥90%)'],[a.filter(x=>x.p<50).length,'تحذيرات (<50%)'],[top.n.split(' ')[0],'الأكثر التزاماً']].map(k=>`<div class="c k"><b>${k[0]}</b><span>${k[1]}</span></div>`).join('');
+const tt=tier(top.p),tl=tier(low.p);
+$('tp').innerHTML=`<h3>🏅 نجم الشهر: ${top.n}</h3><b>${top.h.toFixed(1)} ساعة · ${top.p.toFixed(0)}%</b><p>${top.p>=90?TOP[tip%3]:'الأعلى التزاماً في المجموعة حالياً، والوصول إلى 90 ساعة ممكن بالاستمرار! '+TOP[(tip+1)%3]}</p><button onclick="tip++;render()">رسالة تحفيزية جديدة</button>`;
+$('lw').innerHTML=`<h3>💪 يحتاج دفعة: ${low.n}</h3><b>${low.h.toFixed(1)} ساعة · ${low.p.toFixed(0)}%</b><p>${LOW[(low.p<50?tip:tip+1)%3]}</p>`;
+const L=a.map(x=>x.n.split(' ').slice(0,2).join(' '));
+if(ch1)ch1.destroy();
+ch1=new Chart($('c1'),{type:'bar',data:{labels:L,datasets:[{label:'الساعات الفعلية',data:a.map(x=>+x.h.toFixed(1)),backgroundColor:a.map(x=>tier(x.p)[2]),pcts:a.map(x=>x.p)},{type:'line',label:'الهدف (90 ساعة)',data:a.map(()=>T),borderColor:'#111',borderDash:[6,4],pointRadius:0}]},options:{maintainAspectRatio:false,scales:{y:{beginAtZero:true,suggestedMax:T+5}},plugins:{tooltip:{callbacks:{label:c=>c.datasetIndex?c.dataset.label:`${c.raw} ساعة (${c.dataset.pcts[c.dataIndex].toFixed(0)}%)`}}}},plugins:[{id:'pc',afterDatasetsDraw(c){const x=c.ctx,m=c.getDatasetMeta(0);x.save();x.font='12px Tahoma';x.textAlign='center';x.fillStyle=getComputedStyle(document.body).color;m.data.forEach((b,i)=>x.fillText(c.data.datasets[0].pcts[i].toFixed(0)+'%',b.x,b.y-5));x.restore()}}]});
+day();
+const q=$('q').value.trim().toLowerCase(),f=$('f').value;
+$('tb').innerHTML=s.filter(x=>(!q||(x.n+x.c).toLowerCase().includes(q))&&(!f||tier(x.p)[1]==f)).map(x=>{const t=tier(x.p);return `<tr><td>${x.n}</td><td>${x.c}</td><td>${x.ses}</td><td>${x.h.toFixed(1)}</td><td><div class="pb"><i style="width:${Math.min(x.p,100)}%;background:${t[2]}"></i></div>${x.p.toFixed(1)}%</td><td>${x.avg.toFixed(2)}</td><td style="color:${x.df<0?'#D32F2F':'#2E7D32'}">${x.df>0?'+':''}${x.df.toFixed(2)}</td><td><span class="bd ${t[1]}">${t[0]}</span></td></tr>`}).join('')||'<tr><td colspan="8">لا توجد نتائج</td></tr>'}
+function day(){const mo=$('m').value,ex=$('ex').checked,i=+$('ps').value,n=M[mo].d,v=Array(n).fill(0);
+D.r.filter(r=>r[0]==i&&r[1]==mo).forEach(r=>{if(ex&&r[3]>CAP)return;const k=r[2].slice(8)-1;if(k>=0&&k<n)v[k]+=r[3]/60});
+if(ch2)ch2.destroy();
+ch2=new Chart($('c2'),{type:'bar',data:{labels:v.map((_,k)=>k+1),datasets:[{label:'ساعات المذاكرة',data:v.map(z=>+z.toFixed(2)),backgroundColor:v.map(z=>z>=GOAL?'#2E7D32':z>=1.5?'#FBC02D':'#D32F2F')},{type:'line',label:'الهدف اليومي (3 ساعات)',data:v.map(()=>GOAL),borderColor:'#111',borderDash:[6,4],pointRadius:0}]},options:{maintainAspectRatio:false,scales:{y:{beginAtZero:true,suggestedMax:4}}}})}
+['m','ex','q','f'].forEach(id=>$(id).addEventListener(id=='q'?'input':'change',render));$('ps').onchange=day;
+$('m').addEventListener('change',()=>{const a=calc().sort((x,y)=>y.m-x.m);$('ps').value=a[0].i;render()});
+{const a=calc().sort((x,y)=>y.m-x.m);$('ps').value=a[0].i}render();
+</script>
+</body>
+</html>
